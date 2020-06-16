@@ -73,7 +73,7 @@ all: mbuild
 # ModuleTarget
 #
 
-mbuild: $(INIT_TARGET) gen_libs $(CODA_TARGET)
+mbuild: $(INIT_TARGET) gen_libs $(CODA_TARGET) $(OUTPUT_DIR)/$(MODULE_NAME).bc
 
 #
 # Initialization target: print build information and create necessary directories
@@ -114,6 +114,9 @@ $(OUTPUT_DIR)/$(MODULE_NAME) : $(STATIC_LIBRARY_FILES)
 	@echo $(BIN_DIR)/Library/SpdmLib/SpdmRequesterLib/SpdmRequesterLib.a >> $(OUTPUT_DIR)/tmp.list
 	@echo $(OUTPUT_DIR)/$(MODULE_NAME).a >> $(OUTPUT_DIR)/tmp.list
 	"$(DLINK)" $(DLINK_FLAGS) $(DLINK_SPATH) -Wl,--start-group,@$(OUTPUT_DIR)/tmp.list,--end-group $(DLINK_FLAGS2)
+
+$(OUTPUT_DIR)/$(MODULE_NAME).bc : $(OUTPUT_DIR)/$(MODULE_NAME)
+	extract-bc $(BIN_DIR)/$(MODULE_NAME)
 
 #
 # clean all intermediate files
