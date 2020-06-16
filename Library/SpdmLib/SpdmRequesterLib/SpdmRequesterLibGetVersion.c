@@ -8,6 +8,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 
 #include "SpdmRequesterLibInternal.h"
+#include <assert.h>
 
 #pragma pack(1)
 typedef struct {
@@ -131,7 +132,9 @@ SpdmGetVersion (
         return RETURN_DEVICE_ERROR;
       }
       SpdmContext->SPDMVersion = (CommonVersion.MajorVersion << 4) + CommonVersion.MinorVersion; 
+      
     }
   }
+  assert(SpdmContext->SPDMVersion != 0xFF);
   return RETURN_SUCCESS;
 }

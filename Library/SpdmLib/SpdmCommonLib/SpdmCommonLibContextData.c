@@ -470,6 +470,7 @@ SpdmInitContext (
   SpdmContext = Context;
   ZeroMem (SpdmContext, sizeof(SPDM_DEVICE_CONTEXT));
   SpdmContext->Version = SPDM_DEVICE_CONTEXT_VERSION;
+  SpdmContext->SPDMVersion = 0xFF;
   SpdmContext->SupportedSPDMVersions[0].MajorVersion = 1;
   SpdmContext->SupportedSPDMVersions[0].MinorVersion = 0;
   SpdmContext->SupportedSPDMVersions[1].MajorVersion = 1;
